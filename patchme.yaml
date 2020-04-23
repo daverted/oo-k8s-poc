@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patchme-deployment
+  labels:
+    app: patchme
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: patchme
+  template:
+    metadata:
+      labels:
+        app: patchme
+    spec:
+      containers:
+      - name: patchme
+        image: patchme
+        imagePullPolicy: Never # for minikube
+        env:
+          - name: PATCHME
+            value: "unpatched"
